@@ -20,8 +20,12 @@ const BooksSchema = new mongoose.Schema({
     borrowDate: {
         type: Date,
         required: false // This can be optional, as not all books might be borrowed immediately
+    },
+    imageUrl : {
+        type:String,
+        required: false
     }
 });
 
-const Books = mongoose.model("Books", BooksSchema);
+const Books = mongoose.model('Book', BooksSchema);
 exports.Books = Books;

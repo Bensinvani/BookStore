@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users List - Book Library</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .user-card {
+            margin-bottom: 20px;
+        }
+        .borrowed-books-list {
+            margin-bottom: 0;
+        }
+        .user-status {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 0.25em 0.4em;
+            font-size: 75%;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 0.25rem;
+        }
+        .status-connected { background-color: #28a745; color: white; }
+        .status-disconnected { background-color: #dc3545; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Users and Their Borrowed Books</h2>
+        {{#each users}}
+        <div class="card user-card">
+            <div class="card-body">
+                <h5 class="card-title">{{this.email}}
+                    <span class="user-status {{#if this.isConnected}}status-connected{{else}}status-disconnected{{/if}}">
+                        {{#if this.isConnected}}Connected{{else}}Offline{{/if}}
+                    </span>
+                </h5>
+                <h6 class="card-subtitle mb-2 text-muted">Borrowed Books:</h6>
+                {{#if this.books.length}}
+                <ul class="list-group list-group-flush borrowed-books-list">
+                    {{#each this.books}}
+                    <li class="list-group-item">{{this.name}} - Return by {{formatDate this.borrowDate}}</li>
+                    {{/each}}
+                </ul>
+                {{else}}
+                <p class="card-text">No books borrowed.</p>
+                {{/if}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
